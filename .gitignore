@@ -102,3 +102,18 @@ dist
 
 # TernJS port file
 .tern-port
+
+.project
+.settings/
+.prefs
+.pydevproject
+.idea/
+.idea
+.typings/
+.typings
+.DS_Store
+*.pyc
+*.html
+*.xlm
+
+
