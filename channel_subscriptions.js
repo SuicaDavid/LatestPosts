@@ -4,8 +4,11 @@ let net = require('net')
 let channel = new event.EventEmitter()
 channel.clients = {}
 channel.subscriptions = {}
+channel.setMaxListeners(50)
 
-channel.on('join', function(id, client) {
+channel.on('join', function (id, client) {
+    let welcome = "Welcome!\n" + 'Guests online: ' + this.listeners('broadcast').length + 1
+    client.write(welcome + "\n")
     this.clients[id] = client
     this.subscriptions[id] = (senderId, message) => {
         if (id != senderId) {
@@ -15,12 +18,12 @@ channel.on('join', function(id, client) {
     this.on('broadcast', this.subscriptions[id])
 })
 
-channel.on('leave', function(id) {
+channel.on('leave', function (id) {
     channel.removeListener('broadcast', this.subscriptions[id])
     channel.emit('broadcast', id, id + ' has left the chat. \n')
 })
 
-channel.on('shutdown', function() {
+channel.on('shutdown', function () {
     channel.emit('broadcast', '', 'Chat has shut down.\n')
     channel.removeAllListeners('broadcast')
 })
