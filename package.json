@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SuicaDavid/LatestPosts/issues"
   },
-  "homepage": "https://github.com/SuicaDavid/LatestPosts#readme"
+  "homepage": "https://github.com/SuicaDavid/LatestPosts#readme",
+  "dependencies": {
+    "nimble": "0.0.2"
+  }
 }
