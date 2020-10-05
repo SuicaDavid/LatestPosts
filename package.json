@@ -20,6 +20,7 @@
   "dependencies": {
     "formidable": "^1.2.2",
     "htmlparser": "^1.7.7",
+    "mysql": "^2.18.1",
     "nimble": "0.0.2",
     "request": "^2.88.2"
   }
