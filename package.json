@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/SuicaDavid/LatestPosts#readme",
   "dependencies": {
+    "connect": "^3.7.0",
     "formidable": "^1.2.2",
     "htmlparser": "^1.7.7",
     "mysql": "^2.18.1",
