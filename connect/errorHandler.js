@@ -13,6 +13,7 @@ function hello(req, res, next) {
 }
 
 function errorHandler(err, req, res, next) {
+	let env = process.env.NODE_ENV || 'development'
 	console.error(err.stack)
 	res.setHeader('Content-Type', 'application/json')
 	if (err.notFound) {
@@ -30,6 +31,8 @@ let db = {
 
 function users(req, res, next) {
 	var match = req.url.match(/^\/user\/(.+)/)
+	console.log("user")
+	console.log(match)
 	if (match) {
 		var user = db.users[match[1]]
 		if (user) {
@@ -46,6 +49,7 @@ function users(req, res, next) {
 }
 
 function pets(req, res, next) {
+	console.log("pet")
 	if (req.url.match(/^\/pet\/(.+)/)) {
 		foo()
 	} else {
