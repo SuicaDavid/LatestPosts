@@ -1,0 +1,10 @@
+const connect = require('connect')
+var morgan = require('morgan')
+var logger = morgan('combined')
+var app = connect()
+    .use(logger(':method :url :response-time ms'))
+    .use(function(req, res) {
+        console.log("1")
+        res.end("Hello")
+    })
+    .listen()

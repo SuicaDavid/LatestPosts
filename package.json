@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/SuicaDavid/LatestPosts#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "connect": "^3.7.0",
+    "cookie-parser": "^1.4.5",
     "formidable": "^1.2.2",
     "htmlparser": "^1.7.7",
+    "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "nimble": "0.0.2",
     "request": "^2.88.2"

@@ -1,0 +1,7 @@
+const connext = require('connect')
+const http = require('http')
+const connect = require('connect')
+const bodyParser = require('body-parser')
+const app = connect()
+.use(bodyParser.json({limit: '32kb'}))
+.listen(3000)
