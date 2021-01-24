@@ -16,6 +16,7 @@ var app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.set('photos', __dirname + '/public/images');
+app.set('photos-absolute', '/images')
 
 app.use(logger('dev'))
 app.use(express.json())
@@ -27,7 +28,7 @@ app.use(fileupload())
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.get('/upload', photos.form)
-app.post('/upload', photos.submit(app.get('photos')))
+app.post('/upload', photos.submit(app.get('photos'), app.get('photos-absolute')))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
