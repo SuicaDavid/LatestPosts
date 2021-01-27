@@ -29,6 +29,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.get('/upload', photos.form)
 app.post('/upload', photos.submit(app.get('photos'), app.get('photos-absolute')))
+app.get('/photo/:id/download', photos.download(app.get('photos')))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

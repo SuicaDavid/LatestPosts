@@ -57,3 +57,13 @@ exports.submit = function (dir, absoluteDir) {
 		)
 	}
 }
+exports.download = function(dir, absoluteDir) {
+    return function(req, res, next) {
+        let id = req.params.id
+        Photo.findById(id, function(err, photo) {
+            if(err) next(err)
+            let path = join(dir, photo.path)
+            res.sendfile(path)
+        })
+    } 
+}
