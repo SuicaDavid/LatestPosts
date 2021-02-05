@@ -13,6 +13,7 @@ res.error = function (msg) {
 }
 
 module.exports = function (req, res, next) {
+	console.log('message')
 	res.locals.messages = req.session.message || []
 	res.locals.removeMessages = function () {
 		req.session.message = []

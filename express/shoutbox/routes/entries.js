@@ -16,6 +16,9 @@ exports.form = function (req, res) {
 
 exports.submit = function (req, res, next) {
 	let data = req.body.entry
+	console.log('entry submit')
+	console.log(res.locals)
+	console.log(req.user)
 	let entry = new Entry({
 		username: res.locals.user.name,
 		title: data.title,
@@ -23,6 +26,11 @@ exports.submit = function (req, res, next) {
 	})
 	entry.save(function (err) {
 		if (err) return next(err)
-		res.redirect('/')
+		console.log(1)
+		if (req.remoteUser) {
+			res.json({ message: 'Entry added.' })
+		} else {
+			res.redirect('/')
+		}
 	})
 }

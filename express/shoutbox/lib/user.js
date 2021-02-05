@@ -63,27 +63,35 @@ class User {
 		})
 	}
 
-	static authenticate(name, pass, fn) {
+	static authenticate = (name, pass, fn) => {
+		console.log('auth')
 		this.getByName(name, (err, user) => {
 			if (err) return fn(err)
 			if (!user.id) return fn()
 			bcrypt.hash(pass, user.salt, (err, hash) => {
 				if (err) return fn(err)
-                if (hash == user.pass) return fn(null, user)
-                fn()
+				if (hash == user.pass) return fn(null, user)
+				fn()
 			})
 		})
 	}
+
+	static toJSON() {
+		return {
+			id: this.id,
+			name: this.name,
+		}
+	}
 }
 
-let tobi = new User({
-	name: 'Tobi',
-	pass: 'im a ferret',
-	age: '2',
-})
-tobi.save(function (err) {
-	if (err) throw err
-	console.log('user id %d', tobi.id)
-})
+// let tobi = new User({
+// 	name: 'tobi',
+// 	pass: 'ferret',
+// 	age: '2',
+// })
+// tobi.save(function (err) {
+// 	if (err) throw err
+// 	console.log('user id %d', tobi.id)
+// })
 
 module.exports = User

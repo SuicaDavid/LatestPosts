@@ -17,6 +17,7 @@ const entries = require('./routes/entries')
 const validate = require('./lib/middleware/validate')
 const Entry = require('./lib/entry')
 const page = require('./lib/middleware/page')
+const api = require('./routes/api')
 
 var app = express()
 
@@ -40,10 +41,13 @@ app.use(
 		maxAge: 24 * 60 * 60 * 1000, // 24 hours
 	})
 )
+app.use('/api', api.auth)
 app.use(user)
 app.use(messages)
+// app.use('/users', usersRouter)
 
-app.use('/users', usersRouter)
+app.get('/api/user/:id', api.user)
+app.post('/api/entry', entries.submit);
 app.get('/register', register.form)
 app.post('/register', register.submit)
 app.get('/login', login.form)
