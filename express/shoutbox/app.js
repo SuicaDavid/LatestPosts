@@ -18,6 +18,7 @@ const validate = require('./lib/middleware/validate')
 const Entry = require('./lib/entry')
 const page = require('./lib/middleware/page')
 const api = require('./routes/api')
+const errorHandler = require('./routes/errorHandler')
 
 var app = express()
 
@@ -47,7 +48,8 @@ app.use(messages)
 // app.use('/users', usersRouter)
 
 app.get('/api/user/:id', api.user)
-app.post('/api/entry', entries.submit);
+app.get('/api/entries/:page?', page(Entry.count), api.entries)
+app.post('/api/entry', entries.submit)
 app.get('/register', register.form)
 app.post('/register', register.submit)
 app.get('/login', login.form)
@@ -64,18 +66,21 @@ app.get('/:page?', page(Entry.count, 5), entries.list)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-	next(createError(404))
+	// next(createError(404))
+	errorHandler.notfound(req, res)
 })
+
 
 // error handler
-app.use(function (err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message
-	res.locals.error = req.app.get('env') === 'development' ? err : {}
+// app.use(function (err, req, res, next) {
+// 	// set locals, only providing error in development
+// 	res.locals.message = err.message
+// 	res.locals.error = req.app.get('env') === 'development' ? err : {}
 
-	// render the error page
-	res.status(err.status || 500)
-	res.render('error')
-})
+// 	// render the error page
+// 	res.status(err.status || 500)
+// 	res.render('error')
+// })
+app.use(errorHandler.error)
 
 module.exports = app
